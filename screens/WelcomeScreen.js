@@ -22,21 +22,15 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
         return(
             <View style={styles.container}>
             <View style={styles.header}>
-            <svg>
-                <Image
-                    animation ='bounceIn'
-                    duration ='1500'
-                    source={require('../assets/EasyFLy Assets/newtransport.svg')}
-                    style={styles.travel}
-                    resizeMode='stretch'
-                />
-            </svg>
+            
+               
+            
 
             </View>
             <Animatable.View style={styles.footer}
                 animation='fadeInUpBig'
             >
-            <Text style={styles.title}>Welcome to EasyFly!</Text>
+            <Text style={styles.title}>Stay connected with  EasyFly!</Text>
             <Text style={styles.text}> Sign in with account</Text>
       
             <View style={styles.button}>
@@ -102,8 +96,9 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
         },
         button:{
             alignItems: 'flex-end',
-            marginTop: '30',
-            paddingVertical: 110,
+            marginTop: 10,
+            paddingBottom: 50
+           
         
         },
         signIn:{
@@ -113,7 +108,6 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
             alignItems: 'center',
             borderRadius:25,
             flexDirection: 'row',
-            
             
             
         },

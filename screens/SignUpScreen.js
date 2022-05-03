@@ -13,60 +13,32 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import { Dimensions } from "react-native-web";
 import { NavigationContainer } from "@react-navigation/native";
-import { signInWithGoogle } from "../Firebase";
 
 
 
-const SignUpScreen =() => {
-    const [data,setData] =React.useState({
-        Name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        check_textInputChange: false,
-        secureTextEntry: true
+
+
+const SignUpScreen =({navigation}) => {
     
     
-    });
-    const textInputChange =(val) =>{
-        if (val.length != 0){
-            setData({
-                ...data,
-                Name: val,
-                check_textInputChange: true
-            });
-        }else{
-            setData({
-                ...data,
-                Name: val,
-                check_textInputChange: false
-            });
-        }
-    }
+    const [fullName, setFName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [cPassword, setCPassword] = useState('');
 
-    const handlePasswordChange =(val) => {
-        setData({
-            ...data,
-            password: val
+    const register = () => {
+        console.log('Hi')
+        
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+        }).catch (err => {
+            console.log(err)
+        })
 
-        });
-    }
-    const handleConfirmPasswordChange =(val) => {
-        setData({
-            ...data,
-            password: val
-
-        });
-    }
-
-    const updateSecureTextEntry = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        });
     }
 
     
@@ -75,7 +47,7 @@ const SignUpScreen =() => {
     
       <View style={styles.container}> 
         <View style={styles.header}>
-            <Text style={styles.text_header}>Create An Acoount</Text>
+            <Text style={styles.text_header}>Create An Account</Text>
 
         </View>  
             <View style={styles.footer}>
@@ -87,9 +59,10 @@ const SignUpScreen =() => {
                       />
                       <TextInput
                           placeholder=" Name"
+                          value={fullName}
+                          onChangeText = {text => setFName(text)}
                           style={styles.textInput}
                           autoCapitalize='none'
-                          onChangeText={(val)=>textInputChange(val)}
                       />
                       
 
@@ -104,7 +77,8 @@ const SignUpScreen =() => {
                            placeholder=' Email'
                            style={styles.textInput}
                            autoCapitalize="none"
-                           onChangeText={(val)=>textInputChange(val)}
+                           value={email}
+                          onChangeText = {text => setEmail(text)}
                        />
                       </View>  
                       <View style={styles.action}>
@@ -113,44 +87,30 @@ const SignUpScreen =() => {
                         color="black"
                          />
                        <TextInput
-                           placeholder=' Password'
-                           secureTextEntry={data.secureTextEntry?true:false}
-                        
+                           placeholder='Password'
+                           secureTextEntry
                            style={styles.textInput}
                            autoCapitalize="none"
-                           onChangeText={(val)=>handlePasswordChange(val)}
+                           value={password}
+                           onChangeText = {text => setPassword(text)}
                        />
-                        <TouchableOpacity
-                            onPress={updateSecureTextEntry}
-                        >
-                        
-                       <Feather name="eye-off" 
-                       size={24}
-                        color="black"
-                         />
-                         </TouchableOpacity>
+                       <Feather name="eye-off" size={24} color="black" />
                       </View>
 
                       <View style={styles.action}>
-                      <FontAwesome name="unlock" 
-                      size={24} 
-                      color="black"
+                            <FontAwesome name="unlock" 
+                            size={24} 
+                            color="black"
                        />
                        <TextInput
                            placeholder='ConfirmPassword'
-                           secureTextEntry={data.secureTextEntry?true:false}
+                           secureTextEntry
                            style={styles.textInput}
                            autoCapitalize="none"
-                           onChangeText={(val)=>handleConfirmPasswordChange(val)}
+                           value={cPassword}
+                           onChangeText = {text => setCPassword(text)}
                        />
-                        <TouchableOpacity
-                            onPress={updateSecureTextEntry}
-                        >
-                        <Feather name="eye-off" 
-                       size={24}
-                        color="black"
-                         />
-                         </TouchableOpacity>
+                       <Feather name="eye-off" size={24} color="black" />
                       </View>
                       
                      <Text
@@ -190,6 +150,7 @@ const SignUpScreen =() => {
 
                      </Text>
                       <TouchableOpacity
+                      onPress={console.log('Google')}
                       
                 style={styles.GoogleInput}
                 >
@@ -235,17 +196,19 @@ const SignUpScreen =() => {
             </View> 
                      
                 
-                  <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')}>
-                      <LinearGradient
-                        colors={['#9E9FB5','#505168']}
-                        style={styles.signIn}
-                      >
-                        
-                          <Text style={[styles.textSign,{
-                              color: '#fff'
-                          }]}>Sign In</Text>
-                      </LinearGradient>
-                      </TouchableOpacity>
+            <TouchableOpacity
+                    onPress={() => navigation.navigate('SignInScreen')}
+                    style={[styles.signIn, {
+                        backgroundColor: '#505168',
+                        borderColor: '#505168',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: '#fff'
+                    }]}>Create An Account</Text>
+                </TouchableOpacity>
                      
  
             </View>         
@@ -294,19 +257,19 @@ const styles= StyleSheet.create({
     textSign:{
         fontSize:18,
         fontWeight: 'bold',
-        alignItems: 'center',
+        
         
         
 
     },
     signIn:{
-        width: '80%',
+        width: '100%',
         height:50,
         justifyContent:'center',
         alignItems: 'center',
         borderRadius: 10,
         marginBottom: 40,
-        marginHorizontal: 20,
+        
         
         
     },

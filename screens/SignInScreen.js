@@ -68,7 +68,8 @@ const SignUpScreen =() => {
     
       <View style={styles.container}> 
         <View style={styles.header}>
-            <Text style={styles.text_header}>Create An Acoount</Text>
+           
+            <Text style={styles.text_header}>SignIn</Text>
 
         </View>  
             <View style={styles.footer}>
@@ -113,6 +114,7 @@ const SignUpScreen =() => {
                            autoCapitalize="none"
                            onChangeText={(val)=>handlePasswordChange(val)}
                        />
+                      
                         <TouchableOpacity
                             onPress={updateSecureTextEntry}
                         >
@@ -124,43 +126,37 @@ const SignUpScreen =() => {
                          </TouchableOpacity>
                       </View>
                       
-                     <Text
-                     style={{
-                              fontSize:15,
-                              fontWeight:'500',
-                              color: 'black',
-                              marginTop: 20,
-                              marginLeft: 65
-                          }}
-
-                     >Already have an account? {" "}
-                      <TouchableOpacity>
-                        
-
+                   
+                      <Text></Text>                    
                     
-                          <Text style={{ color: "blue", fontWeight: "bold" }}>SignIn</Text>
 
-                          
-                      </TouchableOpacity>
-                      </Text>
+                     <TouchableOpacity>
+                     <Text style={{ color: "blue", fontWeight: "bold",
+                     marginLeft: 180
+                      }}>Forgotten password?</Text>
+                     </TouchableOpacity> 
 
-                      <Text
+                     <Text></Text>
+                     
+                     
+
+                     <Text
                       style={{
                               fontSize:15,
                               fontWeight:'500',
                               color: 'black',
                               marginTop: 10,
+                              marginEnd: 170,
                               marginLeft: 150,
                               fontWeight: '600'
 
                           }}
-                      > OR
+                      > OR  
                       </Text>
-
-                     <Text>
-
-                     </Text>
+                      <Text></Text>
+                      <Text></Text>   
                       <TouchableOpacity
+                      
                       
                 style={styles.AppleInput}
                 >
@@ -197,6 +193,23 @@ const SignUpScreen =() => {
                    <Text style={{fontSize: 17, marginLeft:15}}>Continue with apple</Text>
 
                 </TouchableOpacity>
+                <Text></Text>
+
+                <Text> </Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('SignUpScreen')}
+                    style={[styles.signIn, {
+                        backgroundColor: '#505168',
+                        borderColor: '#505168',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: '#fff'
+                    }]}>Sign In</Text>
+                </TouchableOpacity>
+           
 
                 
             </View> 
@@ -236,6 +249,7 @@ const styles= StyleSheet.create({
         
     },
     action:{
+
         flexDirection: 'row',
         marginTop:40,
         borderBottomWidth: 1,
@@ -246,6 +260,7 @@ const styles= StyleSheet.create({
     textSign:{
         fontSize:18,
         fontWeight: 'bold',
+        
 
     },
     signIn:{
@@ -318,11 +333,11 @@ const styles= StyleSheet.create({
             padding: 5,
             borderRadius: 10,
             paddingHorizontal: 60,
-          flexDirection: 'row',
-          alignItems: "center",
-        flexWrap: 'wrap',
-          justifyContent:'center',
-          position: 'relative',
+            flexDirection: 'row',
+            alignItems: "center",
+            flexWrap: 'wrap',
+             justifyContent:'center',
+             position: 'relative',
 
       },
       button:{
