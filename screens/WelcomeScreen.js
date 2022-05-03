@@ -14,7 +14,7 @@ import { StyleSheet,
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
     
-    
+        
 
 
 
