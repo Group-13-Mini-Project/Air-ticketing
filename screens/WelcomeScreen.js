@@ -5,7 +5,6 @@ import { Button, SvgWelcomeImage, SvgWelcomeText } from "../components";
 
 const WelcomeScreen = ({ navigation }) => {
   const handleGetStartedButtonPress = () => {
-    console.log("navigating");
     navigation.navigate("Home");
   };
 

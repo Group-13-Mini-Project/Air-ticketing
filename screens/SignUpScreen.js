@@ -1,355 +1,174 @@
+import { Link } from "@react-navigation/native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "../components";
 
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
+const SignUpScreen = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-} from "react-native";
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+  const handleCreateAccountFormSubmit = () => {
+    console.log("signing up as", {
+      name,
+      email,
+      password,
+      confirmPassword,
+    });
+  };
 
-import { Dimensions } from "react-native-web";
-import { NavigationContainer } from "@react-navigation/native";
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.screenTitleContainer}>
+          <Text style={styles.screenTitleText}>Create An Account</Text>
+        </View>
 
+        <View style={styles.formContainer}>
+          <TextInput
+            onChangeText={setName}
+            placeholder="Name"
+            style={styles.textInputContainer}
+            value={name}
+          />
 
+          <TextInput
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            placeholder="Email"
+            style={styles.textInputContainer}
+            value={email}
+          />
 
+          <TextInput
+            onChangeText={setPassword}
+            placeholder="Password"
+            secureTextEntry
+            style={styles.textInputContainer}
+            value={password}
+          />
 
+          <TextInput
+            onChangeText={setConfirmPassword}
+            placeholder="Confirm Password"
+            secureTextEntry
+            style={styles.textInputContainer}
+            value={confirmPassword}
+          />
 
-const SignUpScreen =({navigation}) => {
-    
-    
-    const [fullName, setFName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cPassword, setCPassword] = useState('');
+          <View style={styles.createAccountButtonContainer}>
+            <Button
+              onPress={handleCreateAccountFormSubmit}
+              title="Create Account"
+            />
+          </View>
 
-    const register = () => {
-        console.log('Hi')
-        
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-        }).catch (err => {
-            console.log(err)
-        })
+          <View style={styles.signInRedirectContainer}>
+            <Text style={styles.signInRedirectText}>
+              Already have an account?
+            </Text>
 
-    }
+            <Link to={{ screen: "Home" }} style={styles.signInRedirectLink}>
+              Sign in
+            </Link>
+          </View>
 
-    
+          <View style={styles.orContainer}>
+            <Text style={styles.orText}>OR</Text>
+          </View>
 
-  return(
-    
-      <View style={styles.container}> 
-        <View style={styles.header}>
-            <Text style={styles.text_header}>Create An Account</Text>
+          <View style={styles.socialSignUpButtonContainer}>
+            <Button
+              onPress={() => console.log("google sign-up")}
+              title="Continue with Google"
+              backgroundColor="rgba(253, 122, 113, 0.25)"
+              color="#152A3C"
+            />
+          </View>
 
-        </View>  
-            <View style={styles.footer}>
-                
-                    <View style={styles.action}>
-                    <FontAwesome name="user"
-                     size={24} 
-                     color="black"
-                      />
-                      <TextInput
-                          placeholder=" Name"
-                          value={fullName}
-                          onChangeText = {text => setFName(text)}
-                          style={styles.textInput}
-                          autoCapitalize='none'
-                      />
-                      
+          <View style={styles.socialSignUpButtonContainer}>
+            <Button
+              onPress={() => console.log("facebook sign-up")}
+              title="Continue with Facebook"
+              backgroundColor="rgba(92, 137, 226, 0.37)"
+              color="#152A3C"
+            />
+          </View>
 
-                    </View>
-                      <View style={styles.action}>
-                      <AntDesign name="mail" 
-                      size={24} 
-                      color="black"
-                       />
-                       
-                       <TextInput
-                           placeholder=' Email'
-                           style={styles.textInput}
-                           autoCapitalize="none"
-                           value={email}
-                          onChangeText = {text => setEmail(text)}
-                       />
-                      </View>  
-                      <View style={styles.action}>
-                      <FontAwesome name="lock"
-                       size={24}
-                        color="black"
-                         />
-                       <TextInput
-                           placeholder='Password'
-                           secureTextEntry
-                           style={styles.textInput}
-                           autoCapitalize="none"
-                           value={password}
-                           onChangeText = {text => setPassword(text)}
-                       />
-                       <Feather name="eye-off" size={24} color="black" />
-                      </View>
-
-                      <View style={styles.action}>
-                            <FontAwesome name="unlock" 
-                            size={24} 
-                            color="black"
-                       />
-                       <TextInput
-                           placeholder='ConfirmPassword'
-                           secureTextEntry
-                           style={styles.textInput}
-                           autoCapitalize="none"
-                           value={cPassword}
-                           onChangeText = {text => setCPassword(text)}
-                       />
-                       <Feather name="eye-off" size={24} color="black" />
-                      </View>
-                      
-                     <Text
-                     style={{
-                              fontSize:15,
-                              fontWeight:'500',
-                              color: 'black',
-                              marginTop: 20,
-                              marginLeft: 65
-                          }}
-
-                     >Already have an account? {" "}
-                      <TouchableOpacity>
-                        
-
-                    
-                          <Text style={{ color: "blue", fontWeight: "bold" }}>SignIn</Text>
-
-                          
-                      </TouchableOpacity>
-                      </Text>
-
-                      <Text
-                      style={{
-                              fontSize:15,
-                              fontWeight:'500',
-                              color: 'black',
-                              marginTop: 10,
-                              marginLeft: 150,
-                              fontWeight: '600'
-
-                          }}
-                      > OR
-                      </Text>
-
-                     <Text>
-
-                     </Text>
-                      <TouchableOpacity
-                      onPress={console.log('Google')}
-                      
-                style={styles.GoogleInput}
-                >
-                <AntDesign name="google"
-                 size={24}
-                  color="red" 
-            
-                  />
-                  
-                  <Text style={{fontSize: 17, marginLeft:15,backgroundColor:'#FD7A71'}}>Continue with Google</Text>
-                       
-                </TouchableOpacity>   
-                <Text>
-
-                </Text> 
-                <TouchableOpacity
-                style={styles.facebookInput}
-                >
-                <FontAwesome name="facebook"
-                 size={24} 
-                 color="blue"
-                 
-                  />
-                  <Text style={{fontSize: 17, marginLeft:15,backgroundColor:"#5C89E2",}}>Continue with facebook</Text>
-
-                </TouchableOpacity> 
-                <Text>
-
-                </Text>
-                <TouchableOpacity
-                style={styles.AppleInput}
-                >
-                <AntDesign name="apple1"
-                 size={24}
-                  color="black"
-                  
-                   />
-                   <Text style={{fontSize: 17, marginLeft:15,backgroundColor:'#6F9BC0'}}>Continue with apple</Text>
-
-                </TouchableOpacity>
-
-                
-            </View> 
-                     
-                
-            <TouchableOpacity
-                    onPress={() => navigation.navigate('SignInScreen')}
-                    style={[styles.signIn, {
-                        backgroundColor: '#505168',
-                        borderColor: '#505168',
-                        borderWidth: 1,
-                        marginTop: 15
-                    }]}
-                >
-                    <Text style={[styles.textSign, {
-                        color: '#fff'
-                    }]}>Create An Account</Text>
-                </TouchableOpacity>
-                     
- 
-            </View>         
-    
+          <View style={styles.socialSignUpButtonContainer}>
+            <Button
+              onPress={() => console.log("apple sign-up")}
+              title="Continue with Apple"
+              backgroundColor="rgba(111, 155, 192, 0.1)"
+              color="#152A3C"
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-export default SignUpScreen;
-
-
-const styles= StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#fff',
-        paddingHorizontal:30
-    },
-    header:{
-        flex:1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingHorizontal: 50,
-    },
-    footer:{
-        flex:10,
-        backgroundColor:'#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius:30,
-
-        paddingVertical: 20,
-    },
-
-    text_header:{
-        color: '#505168',
-        fontWeight:'bold',
-        fontSize: 30,
-        
-    },
-    action:{
-        flexDirection: 'row',
-        marginTop:40,
-        borderBottomWidth: 1,
-        borderBottomColor:'#505168',
-        
-
-    },
-    textSign:{
-        fontSize:18,
-        fontWeight: 'bold',
-        
-        
-        
-
-    },
-    signIn:{
-        width: '100%',
-        height:50,
-        justifyContent:'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        marginBottom: 40,
-        
-        
-        
-    },
-    textInput:{
-        flex:1,
-        paddingLeft:10,
-        color:'#505168',
-        borderRadius: 25,
-    
-
-    },
-    
-    inputView: {
-        backgroundColor: "purple",
-        borderRadius: 30,
-        width: "70%",
-        height: 45,
-        marginBottom: 20,
-    
-        alignItems: "center",
-      },
-      text_footer:{
-          color: '#505168',
-          fontSize: 18,
-          
-      },
-      email_text:{
-          color:'#505168',
-          fontSize: 15,
-          marginLeft: 50,
-          alignItems:'stretch',
-          height: 50
-          
-          
-      },
-      
-       GoogleInput:{
-            
-            padding: 5,
-            borderRadius: 10,
-            paddingHorizontal: 60,
-           flexDirection: 'row',
-           alignItems: "center",
-           flexWrap: 'wrap',
-           justifyContent:'center',
-           position: 'relative',
-           marginLeft:15,
-           backgroundColor:'#FD7A71'
-
-      },
-      AppleInput:{
-        padding: 5,
-        borderRadius: 10,
-        paddingHorizontal: 60,
-       flexDirection: 'row',
-       alignItems: "center",
-       flexWrap: 'wrap',
-       justifyContent:'center',
-       position: 'relative',
-       marginLeft:15,
-       backgroundColor:'#6F9BC0'
-      },
-
-      facebookInput:{
-        padding: 5,
-        borderRadius: 10,
-        paddingHorizontal: 60,
-       flexDirection: 'row',
-       alignItems: "center",
-       flexWrap: 'wrap',
-       justifyContent:'center',
-       position: 'relative',
-       marginLeft:15,
-       backgroundColor:'#5C89E2'
-      },
-
-      button:{
-        alignItems: 'center',
-        marginTop: 30,
-        width: '100%',
-      },
-    
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F8F9FA",
+  },
+  screenTitleContainer: {
+    alignItems: "center",
+    marginBottom: 36,
+    marginTop: 24,
+  },
+  screenTitleText: {
+    color: "#505168",
+    fontFamily: "Syne_700Bold",
+    fontSize: 32,
+  },
+  formContainer: {
+    marginHorizontal: 24,
+  },
+  textInputContainer: {
+    borderColor: "#000000",
+    borderRadius: 8,
+    borderWidth: 1,
+    height: 48,
+    marginBottom: 18,
+    paddingHorizontal: 16,
+  },
+  signInRedirectContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  signInRedirectText: {
+    color: "#000000",
+    fontFamily: "Syne_400Regular",
+    fontSize: 14,
+  },
+  signInRedirectLink: {
+    color: "#3C64B2",
+    fontFamily: "Syne_700Bold",
+    fontSize: 14,
+    padding: 4,
+  },
+  orContainer: {
+    alignItems: "center",
+    marginBottom: 18,
+  },
+  orText: {
+    fontFamily: "Syne_600SemiBold",
+    fontSize: 14,
+    color: "#000000",
+  },
+  createAccountButtonContainer: {
+    marginBottom: 8,
+  },
+  socialSignUpButtonContainer: {
+    marginBottom: 12,
+  },
 });
+
+export default SignUpScreen;
