@@ -26,10 +26,7 @@ const PasswordInput = ({ placeholder, value, onChangeText }) => {
         style={styles.textInput}
       />
 
-      <Pressable
-        onPress={handleToggleButtonClick}
-        style={{ paddingVertical: 8 }}
-      >
+      <Pressable onPress={handleToggleButtonClick} style={styles.toggle}>
         <Text style={styles.toggleText}>{toggleText}</Text>
       </Pressable>
     </View>
@@ -51,6 +48,9 @@ const styles = StyleSheet.create({
   textInput: {
     width: "80%",
     fontFamily: "Syne_400Regular",
+  },
+  toggle: {
+    paddingVertical: 8,
   },
   toggleText: {
     color: "#3C64B2",
