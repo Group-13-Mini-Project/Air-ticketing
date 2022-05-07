@@ -1,348 +1,141 @@
+import { Link } from "@react-navigation/native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, OAuthButton, PasswordInput } from "../components";
 
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
+const SignInScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-} from "react-native";
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import LinearGradient from "react-native-linear-gradient";
-import { NavigationContainer } from "@react-navigation/native";
-
-
-
-
-const SignUpScreen =() => {
-    const [data,setData] =React.useState({
-        Name: '',
-        email: '',
-        password: '',
-        
-        check_textInputChange: false,
-        secureTextEntry: true
-    
-    
+  const handleSignInFormSubmit = () => {
+    console.log("signing in as", {
+      email,
+      password,
     });
-    const textInputChange =(val) =>{
-        if (val.length != 0){
-            setData({
-                ...data,
-                Name: val,
-                check_textInputChange: true
-            });
-        }else{
-            setData({
-                ...data,
-                Name: val,
-                check_textInputChange: false
-            });
-        }
-    }
+  };
 
-    const handlePasswordChange =(val) => {
-        setData({
-            ...data,
-            password: val
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.screenTitleContainer}>
+          <Text style={styles.screenTitleText}>Sign In</Text>
+        </View>
 
-        });
-    }
-    
+        <View style={styles.formContainer}>
+          <TextInput
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            placeholder="Email"
+            placeholderTextColor="rgba(0,0,0,0.5)"
+            style={styles.textInputContainer}
+            value={email}
+          />
 
-    const updateSecureTextEntry = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        });
-    }
+          <PasswordInput
+            onChangeText={setPassword}
+            placeholder="Password"
+            value={password}
+          />
 
-    
+          <View style={styles.createAccountButtonContainer}>
+            <Button onPress={handleSignInFormSubmit} title="Sign In" />
+          </View>
 
-  return(
-    
-      <View style={styles.container}> 
-        <View style={styles.header}>
-           
-            <Text style={styles.text_header}>SignIn</Text>
+          <View style={styles.forgotPasswordContainer}>
+            <Link to={{ screen: "Home" }} style={styles.forgotPasswordLink}>
+              Forgot password?
+            </Link>
+          </View>
 
-        </View>  
-            <View style={styles.footer}>
-                
-                    <View style={styles.action}>
-                    <FontAwesome name="user"
-                     size={24} 
-                     color="black"
-                      />
-                      <TextInput
-                          placeholder=" Name"
-                          style={styles.textInput}
-                          autoCapitalize='none'
-                          onChangeText={(val)=>textInputChange(val)}
-                      />
-                      
+          <View style={styles.orContainer}>
+            <Text style={styles.orText}>OR</Text>
+          </View>
 
-                    </View>
-                      <View style={styles.action}>
-                      <AntDesign name="mail" 
-                      size={24} 
-                      color="black"
-                       />
-                       
-                       <TextInput
-                           placeholder=' Email'
-                           style={styles.textInput}
-                           autoCapitalize="none"
-                           onChangeText={(val)=>textInputChange(val)}
-                       />
-                      </View>  
-                      <View style={styles.action}>
-                      <FontAwesome name="lock"
-                       size={24}
-                        color="black"
-                         />
-                       <TextInput
-                           placeholder=' Password'
-                           secureTextEntry={data.secureTextEntry?true:false}
-                        
-                           style={styles.textInput}
-                           autoCapitalize="none"
-                           onChangeText={(val)=>handlePasswordChange(val)}
-                       />
-                      
-                        <TouchableOpacity
-                            onPress={updateSecureTextEntry}
-                        >
-                        
-                       <Feather name="eye-off" 
-                       size={24}
-                        color="black"
-                         />
-                         </TouchableOpacity>
-                      </View>
-                      
-                   
-                      <Text></Text>                    
-                    
+          <View style={styles.socialSignUpButtonContainer}>
+            <OAuthButton
+              backgroundColor="rgba(253, 122, 113, 0.25)"
+              icon={{ name: "google", color: "#F14336" }}
+              onPress={() => console.log("google sign-in")}
+              title="Continue with Google"
+            />
+          </View>
 
-                     <TouchableOpacity>
-                     <Text style={{ color: "blue", fontWeight: "bold",
-                     marginLeft: 180
-                      }}>Forgotten password?</Text>
-                     </TouchableOpacity> 
+          <View style={styles.socialSignUpButtonContainer}>
+            <OAuthButton
+              backgroundColor="rgba(92, 137, 226, 0.37)"
+              icon={{ name: "facebook", color: "#4267B2" }}
+              onPress={() => console.log("facebook sign-in")}
+              title="Continue with Facebook"
+            />
+          </View>
 
-                     <Text></Text>
-                     
-                     
-
-                     <Text
-                      style={{
-                              fontSize:15,
-                              fontWeight:'500',
-                              color: 'black',
-                              marginTop: 10,
-                              marginEnd: 170,
-                              marginLeft: 150,
-                              fontWeight: '600'
-
-                          }}
-                      > OR  
-                      </Text>
-                      <Text></Text>
-                      <Text></Text>   
-                      <TouchableOpacity
-                      
-                      
-                style={styles.AppleInput}
-                >
-                <AntDesign name="google"
-                 size={24}
-                  color="red" 
-            
-                  />
-                  <Text style={{fontSize: 17, marginLeft:15}}>Continue with Google</Text>
-                </TouchableOpacity>   
-                <Text>
-
-                </Text> 
-                <TouchableOpacity
-                style={styles.facebookInput}
-                >
-                <FontAwesome name="facebook"
-                 size={24} 
-                 color="blue"
-                  />
-                  <Text style={{fontSize: 17, marginLeft:15}}>Continue with facebook</Text>
-
-                </TouchableOpacity> 
-                <Text>
-
-                </Text>
-                <TouchableOpacity
-                style={styles.appleInput}
-                >
-                <AntDesign name="apple1"
-                 size={24}
-                  color="black"
-                   />
-                   <Text style={{fontSize: 17, marginLeft:15}}>Continue with apple</Text>
-
-                </TouchableOpacity>
-                <Text></Text>
-
-                <Text> </Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('SignUpScreen')}
-                    style={[styles.signIn, {
-                        backgroundColor: '#505168',
-                        borderColor: '#505168',
-                        borderWidth: 1,
-                        marginTop: 15
-                    }]}
-                >
-                    <Text style={[styles.textSign, {
-                        color: '#fff'
-                    }]}>Sign In</Text>
-                </TouchableOpacity>
-           
-
-                
-            </View> 
-                   
-            </View>         
-    
+          <View style={styles.socialSignUpButtonContainer}>
+            <OAuthButton
+              backgroundColor="rgba(111, 155, 192, 0.1)"
+              icon={{ name: "apple", color: "#152A3C" }}
+              onPress={() => console.log("apple sign-in")}
+              title="Continue with Apple"
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-export default SignUpScreen;
-
-
-const styles= StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#fff',
-    },
-    header:{
-        flex:1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingHorizontal: 50,
-    },
-    footer:{
-        flex:10,
-        backgroundColor:'#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius:30,
-        paddingHorizontal:20,
-        paddingVertical: 20,
-    },
-
-    text_header:{
-        color: '#505168',
-        fontWeight:'bold',
-        fontSize: 30,
-        
-    },
-    action:{
-
-        flexDirection: 'row',
-        marginTop:40,
-        borderBottomWidth: 1,
-        borderBottomColor:'#505168',
-        
-
-    },
-    textSign:{
-        fontSize:18,
-        fontWeight: 'bold',
-        
-
-    },
-    signIn:{
-        width: '100',
-        height:50,
-        justifyContent:'center',
-        alignItems: 'center',
-        borderRadius: 10,
-    },
-    textInput:{
-        flex:1,
-        paddingLeft:10,
-        
-        color:'#505168',
-        borderRadius: 25,
-    
-
-    },
-    appleInput: {
-        backgroundColor:'#6F9BC0',
-        padding: 5,
-        borderRadius: 10,
-        paddingHorizontal: 5,
-      flexDirection: 'row',
-      alignItems: "center",
-    flexWrap: 'wrap',
-      justifyContent:'center',
-      position: 'relative',
-        
-    },
-    inputView: {
-        backgroundColor: "purple",
-        borderRadius: 30,
-        width: "70%",
-        height: 45,
-        marginBottom: 20,
-    
-        alignItems: "center",
-      },
-      text_footer:{
-          color: '#505168',
-          fontSize: 18,
-          
-      },
-      email_text:{
-          color:'#505168',
-          fontSize: 15,
-          marginLeft: 50,
-          alignItems:'stretch',
-          height: 50
-          
-          
-      },
-      AppleInput: {
-        backgroundColor: "#FD7A71",
-          padding: 5,
-          borderRadius: 10,
-          paddingHorizontal: 5,
-          flexDirection: 'row',
-          alignItems: "center",
-          marginTop: -3,
-        flexWrap: 'wrap',
-          justifyContent:'center',
-          position: 'relative',
-        
-          
-      },
-      facebookInput:{
-            backgroundColor:"#5C89E2",
-            padding: 5,
-            borderRadius: 10,
-            paddingHorizontal: 60,
-            flexDirection: 'row',
-            alignItems: "center",
-            flexWrap: 'wrap',
-             justifyContent:'center',
-             position: 'relative',
-
-      },
-      button:{
-        alignItems: 'center',
-        marginTop: 30
-      },
-    
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F8F9FA",
+  },
+  screenTitleContainer: {
+    marginBottom: 36,
+    marginTop: 24,
+    marginHorizontal: 24,
+  },
+  screenTitleText: {
+    color: "#505168",
+    fontFamily: "Syne_700Bold",
+    fontSize: 28,
+  },
+  formContainer: {
+    marginHorizontal: 24,
+  },
+  textInputContainer: {
+    borderColor: "#000000",
+    borderRadius: 8,
+    borderWidth: 1,
+    height: 48,
+    marginBottom: 18,
+    paddingHorizontal: 16,
+    fontFamily: "Syne_400Regular",
+  },
+  forgotPasswordContainer: {
+    alignItems: "flex-end",
+    marginBottom: 10,
+  },
+  forgotPasswordLink: {
+    color: "#3C64B2",
+    fontFamily: "Syne_500Medium",
+    fontSize: 14,
+    padding: 8,
+  },
+  orContainer: {
+    alignItems: "center",
+    marginBottom: 18,
+  },
+  orText: {
+    fontFamily: "Syne_600SemiBold",
+    fontSize: 14,
+    color: "#000000",
+  },
+  createAccountButtonContainer: {
+    marginBottom: 8,
+  },
+  socialSignUpButtonContainer: {
+    marginBottom: 12,
+  },
 });
+
+export default SignInScreen;
