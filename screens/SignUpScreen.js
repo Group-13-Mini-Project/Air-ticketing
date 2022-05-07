@@ -2,11 +2,10 @@ import { Link } from "@react-navigation/native";
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, OAuthButton } from "../components";
+import { Button, OAuthButton, PasswordInput } from "../components";
 
 // TODO
 // 1. React navigation back button
-// 2. Show/Hide password
 
 const SignUpScreen = () => {
   const [name, setName] = useState("");
@@ -48,21 +47,15 @@ const SignUpScreen = () => {
             value={email}
           />
 
-          <TextInput
+          <PasswordInput
             onChangeText={setPassword}
             placeholder="Password"
-            placeholderTextColor="rgba(0,0,0,0.5)"
-            secureTextEntry
-            style={styles.textInputContainer}
             value={password}
           />
 
-          <TextInput
+          <PasswordInput
             onChangeText={setConfirmPassword}
             placeholder="Confirm Password"
-            placeholderTextColor="rgba(0,0,0,0.5)"
-            secureTextEntry
-            style={styles.textInputContainer}
             value={confirmPassword}
           />
 
@@ -125,14 +118,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#F8F9FA",
   },
   screenTitleContainer: {
-    alignItems: "center",
     marginBottom: 36,
     marginTop: 24,
+    marginHorizontal: 24,
   },
   screenTitleText: {
     color: "#505168",
     fontFamily: "Syne_700Bold",
-    fontSize: 32,
+    fontSize: 28,
   },
   formContainer: {
     marginHorizontal: 24,
