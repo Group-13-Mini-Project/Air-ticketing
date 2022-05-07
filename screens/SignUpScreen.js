@@ -2,7 +2,11 @@ import { Link } from "@react-navigation/native";
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button } from "../components";
+import { Button, OAuthButton } from "../components";
+
+// TODO
+// 1. React navigation back button
+// 2. Show/Hide password
 
 const SignUpScreen = () => {
   const [name, setName] = useState("");
@@ -30,6 +34,7 @@ const SignUpScreen = () => {
           <TextInput
             onChangeText={setName}
             placeholder="Name"
+            placeholderTextColor="rgba(0,0,0,0.5)"
             style={styles.textInputContainer}
             value={name}
           />
@@ -38,6 +43,7 @@ const SignUpScreen = () => {
             keyboardType="email-address"
             onChangeText={setEmail}
             placeholder="Email"
+            placeholderTextColor="rgba(0,0,0,0.5)"
             style={styles.textInputContainer}
             value={email}
           />
@@ -45,6 +51,7 @@ const SignUpScreen = () => {
           <TextInput
             onChangeText={setPassword}
             placeholder="Password"
+            placeholderTextColor="rgba(0,0,0,0.5)"
             secureTextEntry
             style={styles.textInputContainer}
             value={password}
@@ -53,6 +60,7 @@ const SignUpScreen = () => {
           <TextInput
             onChangeText={setConfirmPassword}
             placeholder="Confirm Password"
+            placeholderTextColor="rgba(0,0,0,0.5)"
             secureTextEntry
             style={styles.textInputContainer}
             value={confirmPassword}
@@ -80,29 +88,29 @@ const SignUpScreen = () => {
           </View>
 
           <View style={styles.socialSignUpButtonContainer}>
-            <Button
+            <OAuthButton
+              backgroundColor="rgba(253, 122, 113, 0.25)"
+              icon={{ name: "google", color: "#F14336" }}
               onPress={() => console.log("google sign-up")}
               title="Continue with Google"
-              backgroundColor="rgba(253, 122, 113, 0.25)"
-              color="#152A3C"
             />
           </View>
 
           <View style={styles.socialSignUpButtonContainer}>
-            <Button
+            <OAuthButton
+              backgroundColor="rgba(92, 137, 226, 0.37)"
+              icon={{ name: "facebook", color: "#4267B2" }}
               onPress={() => console.log("facebook sign-up")}
               title="Continue with Facebook"
-              backgroundColor="rgba(92, 137, 226, 0.37)"
-              color="#152A3C"
             />
           </View>
 
           <View style={styles.socialSignUpButtonContainer}>
-            <Button
+            <OAuthButton
+              backgroundColor="rgba(111, 155, 192, 0.1)"
+              icon={{ name: "apple", color: "#152A3C" }}
               onPress={() => console.log("apple sign-up")}
               title="Continue with Apple"
-              backgroundColor="rgba(111, 155, 192, 0.1)"
-              color="#152A3C"
             />
           </View>
         </View>
@@ -136,6 +144,7 @@ const styles = StyleSheet.create({
     height: 48,
     marginBottom: 18,
     paddingHorizontal: 16,
+    fontFamily: "Syne_400Regular",
   },
   signInRedirectContainer: {
     flexDirection: "row",
