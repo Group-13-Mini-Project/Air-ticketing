@@ -8,7 +8,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -57,7 +56,7 @@ const CityPicker = ({ label, value, onCityChange, cities }) => {
         visible={modalVisible}
         onRequestClose={closeModal}
       >
-        <SafeAreaView style={styles.modalContainer}>
+        <Pressable onPressOut={closeModal} style={styles.modalContainer}>
           <FlatList
             data={cities}
             renderItem={({ item }) => (
@@ -67,7 +66,7 @@ const CityPicker = ({ label, value, onCityChange, cities }) => {
             ItemSeparatorComponent={ModalListItemSeparator}
             style={styles.modalList}
           />
-        </SafeAreaView>
+        </Pressable>
       </Modal>
     </View>
   );

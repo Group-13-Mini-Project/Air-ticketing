@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, DatePicker } from "../components";
+import { Button, CityPicker, DatePicker } from "../components";
+
+// TODO
+// 1. FlightType component - active button + animations
 
 const HomeScreen = () => {
+  const [flightType, setFlightType] = useState("economy");
+  const [cities, setCities] = useState(null);
+  const [fromCity, setFromCity] = useState("Accra (ACC)");
+  const [toCity, setToCity] = useState("Kumasi (KMS)");
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
+
+  useEffect(() => {
+    fetch("https://easy-fly.herokuapp.com/cities/")
+      .then((res) => res.json())
+      .then((data) => setCities(data));
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,6 +38,65 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.searchForm}>
+        <View
+          style={{
+            flexDirection: "row",
+            marginBottom: 36,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              marginRight: 16,
+              backgroundColor: "#505168",
+              paddingHorizontal: 24,
+              paddingVertical: 8,
+              borderRadius: 4,
+            }}
+          >
+            <Text
+              style={{
+                color: "#FFFFFF",
+                fontFamily: "Syne_400Regular",
+                fontSize: 14,
+              }}
+            >
+              Economy
+            </Text>
+          </View>
+
+          <View style={{ marginRight: 16 }}>
+            <Text style={{ fontFamily: "Syne_400Regular", fontSize: 14 }}>
+              Business
+            </Text>
+          </View>
+
+          <View>
+            <Text style={{ fontFamily: "Syne_400Regular", fontSize: 14 }}>
+              First Class
+            </Text>
+          </View>
+        </View>
+
+        <View style={{ marginBottom: 24 }}>
+          <View style={{ marginBottom: 28 }}>
+            <CityPicker
+              label="From"
+              value={fromCity}
+              onCityChange={setFromCity}
+              cities={cities}
+            />
+          </View>
+
+          <CityPicker
+            label="To"
+            value={toCity}
+            onCityChange={setToCity}
+            cities={cities}
+          />
+        </View>
+
         <View style={styles.datesPickerContainer}>
           <DatePicker
             label="Departure"
@@ -42,7 +114,12 @@ const HomeScreen = () => {
         <Button
           backgroundColor="#505168"
           onPress={() =>
-            console.log("searching for flight", { departureDate, returnDate })
+            console.log("searching for flight", {
+              fromCity,
+              toCity,
+              departureDate,
+              returnDate,
+            })
           }
           title="Search Flight"
         />

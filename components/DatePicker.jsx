@@ -15,25 +15,23 @@ const DatePicker = ({ label, width = "48%", value, onChange }) => {
   const showDatePicker = () => setShow(true);
 
   return (
-    <View style={[styles.container, { width }]}>
+    <Pressable onPress={showDatePicker} style={[styles.container, { width }]}>
       <View style={styles.labelContainer}>
         <Text style={styles.labelText}>{label}</Text>
       </View>
 
-      <Pressable onPress={showDatePicker}>
-        <View style={styles.iconContainer}>
-          <FontAwesome name="calendar-minus-o" size={24} color="#111827" />
-        </View>
+      <View style={styles.iconContainer}>
+        <FontAwesome name="calendar-minus-o" size={24} color="#111827" />
+      </View>
 
-        <View style={styles.dateContainer}>
-          <Text style={styles.dateText}>{dateToDisplayFormat(value)}</Text>
-        </View>
-      </Pressable>
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>{dateToDisplayFormat(value)}</Text>
+      </View>
 
       {show && (
         <DateTimePicker value={value} mode="date" onChange={handleChange} />
       )}
-    </View>
+    </Pressable>
   );
 };
 
