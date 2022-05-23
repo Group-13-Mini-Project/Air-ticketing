@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { LogBox } from "react-native";
 import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Auth } from "./contexts";
 import { useCachedResources } from "./hooks";
 import { Navigation } from "./navigation";
 
@@ -18,8 +19,10 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      <Navigation />
-      <StatusBar />
+      <Auth.Provider>
+        <Navigation />
+        <StatusBar />
+      </Auth.Provider>
     </SafeAreaProvider>
   );
 };

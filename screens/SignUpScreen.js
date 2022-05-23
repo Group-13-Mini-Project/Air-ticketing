@@ -71,7 +71,7 @@ const SignUpScreen = () => {
               Already have an account?
             </Text>
 
-            <Link to={{ screen: "Home" }} style={styles.signInRedirectLink}>
+            <Link to={{ screen: "SignIn" }} style={styles.signInRedirectLink}>
               Sign in
             </Link>
           </View>
