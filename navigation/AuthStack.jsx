@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import { Header } from "../components";
 import { SignInScreen, SignUpScreen, WelcomeScreen } from "../screens";
 
 const Stack = createStackNavigator();
@@ -15,13 +16,13 @@ const AuthStack = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
-        options={{ headerShown: false }}
+        options={{ header: (props) => <Header {...props} /> }}
       />
 
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
-        options={{ headerShown: false }}
+        options={{ header: (props) => <Header {...props} /> }}
       />
     </Stack.Navigator>
   );

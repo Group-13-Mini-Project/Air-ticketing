@@ -1,4 +1,4 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text } from "react-native";
 
 const OAuthButton = ({ onPress, title, backgroundColor = "#4D4F73", icon }) => {
@@ -7,7 +7,7 @@ const OAuthButton = ({ onPress, title, backgroundColor = "#4D4F73", icon }) => {
       onPress={onPress}
       style={[styles.container, { backgroundColor }]}
     >
-      <FontAwesome name={icon.name} color={icon.color} style={styles.icon} />
+      <FontAwesome5 name={icon.name} color={icon.color} style={styles.icon} />
 
       <Text style={[styles.text]}>{title}</Text>
     </Pressable>

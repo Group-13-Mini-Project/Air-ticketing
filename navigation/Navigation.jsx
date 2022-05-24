@@ -4,8 +4,7 @@ import AuthStack from "./AuthStack";
 import RootStack from "./RootStack";
 
 const Navigation = () => {
-  const { authData } = useAuth();
-  console.log("authData", authData);
+  const { authData, setLoginToken } = useAuth();
 
   return (
     <NavigationContainer>

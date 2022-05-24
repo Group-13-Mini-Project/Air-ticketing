@@ -23,7 +23,7 @@ const SignUpScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["bottom", "right", "left"]} style={styles.container}>
       <ScrollView>
         <View style={styles.screenTitleContainer}>
           <Text style={styles.screenTitleText}>Create An Account</Text>
@@ -92,7 +92,7 @@ const SignUpScreen = () => {
           <View style={styles.socialSignUpButtonContainer}>
             <OAuthButton
               backgroundColor="rgba(92, 137, 226, 0.37)"
-              icon={{ name: "facebook", color: "#4267B2" }}
+              icon={{ name: "facebook-f", color: "#4267B2" }}
               onPress={() => console.log("facebook sign-up")}
               title="Continue with Facebook"
             />
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
   },
   screenTitleContainer: {
     marginBottom: 36,
-    marginTop: 24,
     marginHorizontal: 24,
   },
   screenTitleText: {

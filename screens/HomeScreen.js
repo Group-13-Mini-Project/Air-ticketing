@@ -21,7 +21,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["bottom", "left", "right"]} style={styles.container}>
       <View style={styles.headerContainer}>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>Choose</Text>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#505168",
     borderRadius: 8,
     marginHorizontal: 24,
-    marginVertical: 24,
+    marginBottom: 24,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
