@@ -5,7 +5,7 @@ import {
   Syne_700Bold,
   useFonts,
 } from "@expo-google-fonts/syne";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const useCachedResources = () => {
     async function loadResourcesAsync() {
       try {
         await SplashScreen.preventAutoHideAsync();
-        await Font.loadAsync({ ...FontAwesome.font });
+        await Font.loadAsync({ ...FontAwesome5.font });
       } catch (e) {
         console.warn(e);
       } finally {

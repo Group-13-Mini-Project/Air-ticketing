@@ -1,4 +1,4 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -21,7 +21,7 @@ const DatePicker = ({ label, width = "48%", value, onChange }) => {
       </View>
 
       <View style={styles.iconContainer}>
-        <FontAwesome name="calendar-minus-o" size={24} color="#111827" />
+        <FontAwesome5 name="calendar-minus" size={24} color="#111827" />
       </View>
 
       <View style={styles.dateContainer}>
